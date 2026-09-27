@@ -21,3 +21,4 @@ build/
 *.obj
 *.bin
 *.onnx
+__pycache__/

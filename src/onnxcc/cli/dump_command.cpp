@@ -107,6 +107,11 @@ int run_dump(int argc, const char* const* argv, std::ostream& out, std::ostream&
         if (result.count("model") == 0) {
             return usage_error(err, "missing required option --model <path>");
         }
+        // cxxopts keeps the last value when an option repeats, which would
+        // silently drop the first path. dump works on exactly one model.
+        if (result.count("model") > 1) {
+            return usage_error(err, "--model given more than once; pass exactly one model");
+        }
 
         DumpOptions opts;
         opts.model_path = result["model"].as<std::string>();

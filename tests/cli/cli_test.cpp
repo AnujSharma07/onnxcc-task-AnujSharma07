@@ -189,6 +189,13 @@ TEST(CliDump, ModelFollowedByAnotherFlagIsRejected) {
     EXPECT_TRUE(Contains(r.err, "--model needs a path"));
 }
 
+// Without this check cxxopts would keep "b.onnx" and silently drop "a.onnx".
+TEST(CliDump, RepeatedModelIsRejected) {
+    const CliResult r = run_cli({"dump", "--model", "a.onnx", "--model", "b.onnx"});
+    ExpectUsageError(r);
+    EXPECT_TRUE(Contains(r.err, "more than once"));
+}
+
 TEST(CliDump, EmptyModelPathIsRejected) {
     const CliResult r = run_cli({"dump", "--model", ""});
     ExpectUsageError(r);

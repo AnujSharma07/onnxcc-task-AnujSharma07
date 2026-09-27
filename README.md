@@ -49,8 +49,8 @@ failure (reserved for when dump actually reads models), `2` usage error.
 
 Also rejected with exit 2 and a message on stderr: an unknown option, `--model`
 with no value, `--model --verbose` (a flag taken as the path), an empty path,
-a bare path without `--model` (`dump f.onnx`), and bad boolean values
-(`--verbose=maybe`).
+`--model` given twice, a bare path without `--model` (`dump f.onnx`), and bad
+boolean values (`--verbose=maybe`).
 
 **Phase 1 scope:** `dump` validates its arguments but does not open the file,
 as the task specifies. `--show-graph` and `--verbose` are parsed and change the
