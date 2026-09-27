@@ -4,10 +4,13 @@ add_library(onnxcc_lib STATIC
     onnxcc/version.cpp
 )
 
+# Command-line parsing and subcommand dispatch (defines onnxcc_cli)
+add_subdirectory(onnxcc/cli)
+
 add_executable(onnxcc onnxcc/main.cpp)
 
-# Link the onnxcc_lib library to the onnxcc executable
-target_link_libraries(onnxcc PRIVATE onnxcc_lib)
+# main.cpp only forwards to onnxcc::cli::run(); onnxcc_cli brings onnxcc_lib with it
+target_link_libraries(onnxcc PRIVATE onnxcc_cli)
 
 target_link_libraries(onnxcc_lib
     PRIVATE
