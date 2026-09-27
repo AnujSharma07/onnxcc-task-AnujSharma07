@@ -19,3 +19,6 @@ target_compile_definitions(unit_tests
 include(GoogleTest)
 # run the exe in background and discover all the tests in the unit_tests executable and register them with CTest. 
 gtest_discover_tests(unit_tests)
+
+# Part A command-line contract: unit tests and end-to-end checks of the binary
+add_subdirectory(cli)
